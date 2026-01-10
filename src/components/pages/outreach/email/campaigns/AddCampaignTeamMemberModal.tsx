@@ -80,9 +80,9 @@ const AddCampaignTeamMemberModal: React.FC<AddCampaignTeamMemberModalProps> = ({
       handling_guidelines: "",
     },
     validate: {
-      team_member_id: (value) =>
+      team_member_id: (value: string) =>
         !value ? "Please select a team member" : null,
-      priority: (value) =>
+      priority: (value: number) =>
         value < 1 || value > 10 ? "Priority must be between 1 and 10" : null,
     },
   });

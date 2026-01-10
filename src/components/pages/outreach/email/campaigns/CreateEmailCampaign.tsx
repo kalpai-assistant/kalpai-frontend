@@ -87,9 +87,9 @@ const CreateEmailCampaign: React.FC = () => {
       scheduled_at: null as Date | null,
     },
     validate: {
-      name: (value) => (!value ? "Campaign name is required" : null),
-      subject_line: (value) => (!value ? "Subject line is required" : null),
-      ai_flavor: (value, values) => {
+      name: (value: string) => (!value ? "Campaign name is required" : null),
+      subject_line: (value: string) => (!value ? "Subject line is required" : null),
+      ai_flavor: (value: string, values: any) => {
         // Only validate AI flavor in automation mode
         // Validation happens in handleNext for better UX
         return null;

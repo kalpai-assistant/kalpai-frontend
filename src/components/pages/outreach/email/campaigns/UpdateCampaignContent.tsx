@@ -64,7 +64,7 @@ const UpdateCampaignContent: React.FC<UpdateCampaignContentProps> = ({
       ai_flavor: campaign.ai_flavor || "",
     },
     validate: {
-      subject_line: (value) => (!value ? "Subject line is required" : null),
+      subject_line: (value: string) => (!value ? "Subject line is required" : null),
     },
   });
 

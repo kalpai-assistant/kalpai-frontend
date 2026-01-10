@@ -36,7 +36,7 @@ const CreateEmailList: React.FC = () => {
       description: "",
     },
     validate: {
-      name: (value) => (!value ? "List name is required" : null),
+      name: (value: string) => (!value ? "List name is required" : null),
     },
   });
 

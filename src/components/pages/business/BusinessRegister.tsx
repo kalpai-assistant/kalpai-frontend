@@ -36,10 +36,12 @@ const BusinessRegister = () => {
     },
 
     validate: {
-      name: (value) => (value ? null : "Business Name is required"),
-      business_type: (value) => (value ? null : "Business Type is required"),
-      description: (value) => (value ? null : "Description is required"),
-      email: (value) =>
+      name: (value: string) => (value ? null : "Business Name is required"),
+      business_type: (value: string) =>
+        value ? null : "Business Type is required",
+      description: (value: string) =>
+        value ? null : "Description is required",
+      email: (value: string) =>
         validateEmail(value) ? null : "Please enter a valid email",
     },
   });

@@ -44,7 +44,7 @@ const TelegramSetupForm: React.FC<TelegramSetupFormProps> = ({
       bot_token: "",
     },
     validate: {
-      bot_token: (value) => {
+      bot_token: (value: string) => {
         if (!value) return "Bot token is required";
         if (!value.includes(":")) return "Invalid bot token format";
         return null;

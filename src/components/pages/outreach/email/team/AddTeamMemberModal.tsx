@@ -37,7 +37,7 @@ const AddTeamMemberModal: React.FC<AddTeamMemberModalProps> = ({
       description: "",
     },
     validate: {
-      email: (value) =>
+      email: (value: string) =>
         !value
           ? "Email is required"
           : !/^\S+@\S+$/.test(value)

@@ -64,7 +64,7 @@ const EditCampaignTeamMemberModal: React.FC<
       is_active: true,
     },
     validate: {
-      priority: (value) =>
+      priority: (value: number) =>
         value < 1 || value > 10 ? "Priority must be between 1 and 10" : null,
     },
   });
