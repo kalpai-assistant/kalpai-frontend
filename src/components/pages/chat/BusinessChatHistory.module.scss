@@ -1,0 +1,14 @@
+.chatsList {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+  }
+
+  .isError {
+    color: red;
+  }
+}

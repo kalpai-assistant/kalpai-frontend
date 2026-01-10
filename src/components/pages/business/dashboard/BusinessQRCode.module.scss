@@ -1,0 +1,19 @@
+.bottomButtons {
+  padding: 1rem;
+  background-color: #f4f4f4;
+  width: 100%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e0e0e0;
+    transition: background-color 0.3s ease;
+  }
+}
+
+.QRContainer {
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}

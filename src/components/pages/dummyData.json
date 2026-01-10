@@ -1,0 +1,55 @@
+{
+  "business_type": "professionalism",
+  "business_name": "Tushar Wines",
+  "description": "Welcome to Tushar Wines, your premier destination for an exquisite selection of wines, spirits, and beverages. We pride ourselves on offering a diverse range of high-quality local and international wines to suit every palate, occasion, and budget. Conveniently located at Mandai, our shop is open from 10:00 AM to 9:00 PM, seven days a week, ensuring you can find the perfect bottle at your convenience. Whether you’re a connoisseur or a casual enthusiast, our knowledgeable staff is here to guide you with expert recommendations and pairing advice. We also provide gift packaging, exclusive memberships, and special offers for bulk purchases. Visit us today and let us elevate your wine experience with our exceptional service and curated collection!",
+  "branches": [
+    {
+      "branch_name": "Main Branch",
+      "address": "Mandai",
+      "timings": [
+        {
+          "day": "Monday",
+          "start_time": "10:00 AM",
+          "end_time": "9:00 PM"
+        },
+        {
+          "day": "Tuesday",
+          "start_time": "10:00 AM",
+          "end_time": "9:00 PM"
+        },
+        {
+          "day": "Wednesday",
+          "start_time": "10:00 AM",
+          "end_time": "9:00 PM"
+        },
+        {
+          "day": "Thursday",
+          "start_time": "10:00 AM",
+          "end_time": "9:00 PM"
+        },
+        {
+          "day": "Friday",
+          "start_time": "10:00 AM",
+          "end_time": "9:00 PM"
+        },
+        {
+          "day": "Saturday",
+          "start_time": "10:00 AM",
+          "end_time": "9:00 PM"
+        },
+        {
+          "day": "Sunday",
+          "start_time": "10:00 AM",
+          "end_time": "9:00 PM"
+        }
+      ]
+    }
+  ],
+  "services": [
+    "Expert recommendations",
+    "Pairing advice",
+    "Gift packaging",
+    "Exclusive memberships",
+    "Special offers for bulk purchases"
+  ]
+}

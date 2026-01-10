@@ -1,0 +1,90 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.modalError {
+  color: #ff4d4f;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  background-color: #ffffff;
+  padding: 48px;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+  transition: all 0.3s ease;
+  &.shake {
+    animation: shake 0.5s ease;
+  }
+}
+
+.otpContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.otpButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.otpInput {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  &.error {
+    border-color: #ff4d4f; // Red border on error
+  }
+}
+
+.errorMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(93, 212, 255);
+  gap: 16px;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}

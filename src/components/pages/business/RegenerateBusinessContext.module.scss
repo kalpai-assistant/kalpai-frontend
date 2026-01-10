@@ -1,0 +1,29 @@
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+  from {
+    transform: rotate(0deg);
+  }
+}
+
+.regenContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  .descriptionArea {
+    width: 100%;
+  }
+
+  .iconRefresh {
+    animation: spin 1s linear infinite;
+  }
+
+  .error {
+    size: 0.5rem;
+    color: red;
+  }
+}

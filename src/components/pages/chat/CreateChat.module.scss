@@ -1,0 +1,63 @@
+.createChat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+/* First Half */
+.topSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 0; // Takes up the first half
+  opacity: 0; // Initially hidden
+  transition: opacity 1s ease-in, height 1s ease-in; // Fade-in effect
+
+  &.show {
+    height: 50vh; // Takes up the first half
+    opacity: 1;
+  }
+}
+
+.avatarWithBorder {
+  border: 8px solid #17a2b8; // Blue border
+  padding: 4px; // Creates space between image and border
+  border-radius: 50%; // Ensures it's circular
+}
+
+/* Second Half */
+.bottomSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Starts full screen
+  transition: height 1s ease-in; // Smooth transition to 50vh
+
+  &.show {
+    height: 50vh; // Shrinks to half
+  }
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.buttonText {
+  color: white;
+  &.isLoading {
+    color: #6c757d;
+  }
+}
+
+.poweredBy {
+  position: absolute;
+  bottom: 4px;
+  font-size: 12px;
+  color: #aaa;
+  text-align: center;
+}

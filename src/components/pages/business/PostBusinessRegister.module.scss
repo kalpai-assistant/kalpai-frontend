@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1rem; // Space between elements
+
+  .description {
+    flex: 0 0 auto; // Only take up required space
+    font-size: 0.9rem;
+  }
+
+  .businessDataContainer {
+    flex: 1 1 auto; // Allow the container to grow
+    max-height: 60vh; // Set a maximum height (adjust as needed)
+    overflow-y: auto; // Enable vertical scroll if content exceeds container height
+    border: 1px solid #ccc; // Add border
+    padding: 1rem; // Add padding
+    background-color: #f9f9f9; // Optional: Background color for better visibility
+  }
+
+  .submitButton {
+    flex: 0 0 auto; // Only take up required space
+    align-self: center; // Center align the button horizontally
+  }
+}

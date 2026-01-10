@@ -1,0 +1,68 @@
+.businessAppShell {
+  .header {
+    display: flex;
+    align-items: center;
+
+    .burger {
+      cursor: pointer;
+    }
+
+    .headerLogo {
+      height: 20px;
+      transition: height 0.3s ease;
+      &.opened {
+        height: 40px;
+        transition: height 0.3s ease;
+      }
+    }
+
+    .logoutIcon {
+      margin-left: auto; // Push to the far right
+      cursor: pointer;
+      transition: color 0.3s ease;
+      color: gray;
+      :hover {
+        color: red;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+  .navbar {
+    border: 0;
+  }
+}
+
+.reopenIcon {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.miniNavItem {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+  }
+
+  &[data-active="true"] {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: var(--mantine-color-blue-6);
+
+    &:hover {
+      background-color: white;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}

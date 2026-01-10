@@ -1,0 +1,176 @@
+.callModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  min-width: 400px;
+  max-width: 90%;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    left: 0;
+    transform: none;
+  }
+
+  .callModal {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+      padding: 16px;
+    }
+  }
+
+  .callHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    
+    .callStatus {
+      text-align: center;
+      
+      .statusText {
+        display: block;
+        font-size: 1rem;
+        opacity: 0.8;
+        margin-bottom: 4px;
+
+        @media (max-width: 768px) {
+          font-size: 0.9rem;
+        }
+      }
+      
+      .callTimer {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 600;
+
+        @media (max-width: 768px) {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+
+  .callContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .avatarContainer {
+      margin-bottom: 30px;
+
+      @media (max-width: 768px) {
+        margin-bottom: 24px;
+      }
+      
+      .callAvatar {
+        width: 150px !important;
+        height: 150px !important;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+        @media (max-width: 768px) {
+          width: 120px !important;
+          height: 120px !important;
+          border-width: 3px;
+        }
+      }
+    }
+
+    .nameContainer {
+      .callerName {
+        font-size: 2rem;
+        font-weight: 300;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+        @media (max-width: 768px) {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+
+  .callControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 40px 0;
+
+    @media (max-width: 768px) {
+      gap: 24px;
+      padding: 32px 0;
+    }
+
+    .controlButton {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+      @media (max-width: 768px) {
+        width: 55px;
+        height: 55px;
+        font-size: 1.2rem;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      &.active {
+        background: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+      }
+
+      &.endCallButton {
+        background: #ff4757;
+        color: white;
+        transform: rotate(135deg);
+
+        &:hover {
+          background: #ff3742;
+          transform: rotate(135deg) scale(1.1);
+        }
+
+        &:active {
+          transform: rotate(135deg) scale(0.95);
+        }
+      }
+    }
+  }
+}

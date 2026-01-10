@@ -1,0 +1,47 @@
+.mainContainer {
+  min-height: 82vh;
+
+  .notificationList {
+    min-width: 100%;
+    flex-grow: 1;
+
+    .notification {
+      background-color: #fafafa;
+      cursor: pointer;
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      padding: 1rem;
+
+      &:hover {
+        background-color: #f1f1f1; /* Hover effect */
+      }
+
+      &.selected {
+        background-color: #d9d9d9;
+      }
+    }
+  }
+  .chatWindowWrapper {
+    display: flex;
+    justify-content: center;
+    flex: 1; /* Consume equal space with list */
+    max-width: 50%; /* Normal screen width distribution */
+    height: 100%; /* Match the parent height */
+    margin-top: -1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column; /* Stack elements vertically */
+    height: 100vh; /* Full screen height for mobile */
+  }
+
+  .list,
+  .chatWindowWrapper {
+    max-width: 100%; /* Full width */
+    flex: unset; /* Remove flex sizing for stacked layout */
+    height: 100%; /* Full height for mobile screens */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+  }
+}

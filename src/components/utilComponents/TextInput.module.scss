@@ -1,0 +1,67 @@
+// src/components/utilComponents/TextInput.module.scss
+
+.inputWrapper {
+  width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+
+  label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    transition: font-size 0.3s ease;
+  }
+
+  &.expanded {
+    label {
+      font-size: 1rem; // Slightly larger label if needed
+    }
+  }
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  .input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      padding: 12px; // Expands padding on focus
+      font-size: 18px; // Increases font size on focus
+      border-color: #007bff;
+      outline: none;
+    }
+
+    &.withIcon {
+      padding-left: 2.5rem; // Adjust for icon at the start
+    }
+
+    &.iconEnd {
+      padding-right: 2.5rem; // Adjust for icon at the end
+    }
+  }
+
+  .icon {
+    position: absolute;
+    color: #888;
+    font-size: 1.2rem;
+
+    &.iconStart {
+      left: 0.5rem; // Position icon at the start
+    }
+
+    &.iconEnd {
+      right: 0.5rem; // Position icon at the end
+    }
+  }
+}

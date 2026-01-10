@@ -1,0 +1,149 @@
+.businessDocs {
+  padding: 1rem;
+  margin-block: 1rem;
+  border-radius: 0.5rem;
+  border-bottom-left-radius: 0;
+  border: 0.5px solid rgba(0, 0, 0, 0.07);
+  background-color: #f4f4f4;
+  overflow-y: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+
+  &[data-accept] {
+    background: linear-gradient(
+      135deg,
+      rgba(34, 139, 230, 0.15),
+      rgba(34, 139, 230, 0.05)
+    );
+    border: 2px solid #228be6;
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(34, 139, 230, 0.2);
+
+    &::before {
+      content: "✨Drop your files here! We're ready!✨";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(34, 139, 230, 0.9);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      pointer-events: none;
+      z-index: 10;
+      animation: acceptPulse 0.6s ease-in-out infinite alternate;
+      backdrop-filter: blur(4px);
+    }
+  }
+
+  &[data-reject] {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 77, 79, 0.15),
+      rgba(255, 77, 79, 0.05)
+    );
+    border: 2px dashed #ff4d4f;
+    animation: rejectShake 0.5s ease-in-out;
+
+    &::before {
+      content: "🚫 Supported: JPG, PNG, GIF, PDF 🚫";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 77, 79, 0.9);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      pointer-events: none;
+      z-index: 10;
+      animation: rejectBounce 0.5s ease-out;
+      backdrop-filter: blur(4px);
+    }
+  }
+}
+
+@keyframes acceptPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+@keyframes rejectShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes rejectBounce {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.emptyState {
+  cursor: pointer;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #228be6;
+    background-color: rgba(34, 139, 230, 0.05);
+  }
+}
+
+.managerDropzone {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyStateManager {
+  height: 100px;
+}
+
+.uploadButton {
+  width: 100%;
+}
+
+.dragOverlay {
+  background-color: #f0f0f0;
+}
+
+.collapseButton {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+}

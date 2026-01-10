@@ -1,0 +1,112 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 82vh;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    max-height: 100%;
+    overflow-y: auto;
+    flex: 1; /* Consume equal space with chatWindowWrapper */
+    max-width: 30%; /* Normal screen width distribution */
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Align content to the left */
+    align-items: center; /* Align items vertically centered */
+    padding: 1rem;
+    width: 100%; /* Ensure content spans full width */
+    background-color: #fafafa;
+    cursor: pointer;
+    display: flex; /* Ensure items inside are aligned horizontally */
+    justify-content: space-between; /* Space between content and icon */
+    align-items: center; /* Align items vertically centered */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    transition: background-color 0.3s ease; /* Smooth transition for background-color */
+
+    &:hover {
+      background-color: #f1f1f1; /* Hover effect */
+    }
+
+    &.selected {
+      background-color: #d9d9d9;
+    }
+
+    .infoWrapper {
+      display: flex;
+      justify-content: space-between; /* Align content to the left */
+      align-items: center; /* Align items vertically centered */
+      width: 100%; /* Ensure content spans full width */
+
+      .info {
+        display: flex;
+        justify-content: flex-start; /* Align content to the left */
+        align-items: center; /* Align items vertically centered */
+        gap: 10px; /* Optional: Spacing between Time and IP */
+
+        .insideInfo {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start; /* Align items vertically centered */
+          gap: 4px; /* Optional: Spacing between Time and IP */
+          padding-inline: 8px;
+        }
+      }
+
+      .sourceLogo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto; /* Push logo to the right */
+        padding-left: 8px;
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .detailsTable {
+      width: 100%;
+      padding-top: 10px;
+    }
+  }
+
+  .icon {
+    margin-left: 10px; /* Optional: Add spacing between the icon and the info */
+  }
+
+  /* Styles for the chat window when it's shown */
+  .chatWindowWrapper {
+    display: flex;
+    justify-content: center;
+    flex: 1; /* Consume equal space with list */
+    max-width: 50%; /* Normal screen width distribution */
+    height: 100%; /* Match the parent height */
+    margin-top: -4.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column; /* Stack elements vertically */
+    height: 100vh; /* Full screen height for mobile */
+  }
+
+  .list,
+  .chatWindowWrapper {
+    max-width: 100%; /* Full width */
+    flex: unset; /* Remove flex sizing for stacked layout */
+    height: 100%; /* Full height for mobile screens */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+  }
+}

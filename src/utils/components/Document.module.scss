@@ -1,0 +1,48 @@
+// Document List Styles
+.documentList {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.documentIcon {
+  font-size: 20px;
+}
+
+// Document Preview Styles
+.imagePreview {
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.pdfContainer {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.pdfIframe {
+  border: none;
+  border-radius: 8px;
+}
+
+.fallbackContainer {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+// Document Carousel Styles
+.carouselSlide {
+  position: relative;
+}
+
+.carouselOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
