@@ -22,7 +22,7 @@ const Login: React.FC = () => {
     <div className={styles.wrapper}>
       {/* Left side: Form */}
       <Container size="sm" className={styles.container}>
-        <Title className={styles.title}>Airaibot</Title>
+        <Title className={styles.title}>Kalp AI</Title>
         {showOTPVerify ? (
           <OTP
             email={email}
