@@ -201,6 +201,10 @@ const CampaignSenderAccounts: React.FC<CampaignSenderAccountsProps> = ({
           available: dailyLimit,
         },
       ]);
+      setSelectedGmailId(null);
+      setDailyLimit(500);
+      setPriority(1);
+      setError("");
     } else {
       // Edit mode: call API
       addMutation.mutate({
@@ -496,7 +500,7 @@ const CampaignSenderAccounts: React.FC<CampaignSenderAccountsProps> = ({
                   : "500"
               }
               value={dailyLimit}
-              onChange={(value) => setDailyLimit(Number(value) || 500)}
+              onChange={(value) => setDailyLimit(Number(value))}
               min={1}
               max={10000}
               step={50}
