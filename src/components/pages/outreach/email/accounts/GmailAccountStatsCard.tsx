@@ -38,11 +38,7 @@ const GmailAccountStatsCard: React.FC<GmailAccountStatsCardProps> = ({
   const [newLimit, setNewLimit] = useState<number>(2000);
   const [error, setError] = useState<string>("");
 
-  const {
-    data: stats,
-    isLoading,
-    refetch,
-  } = useQuery(
+  const { data: stats, isLoading } = useQuery(
     [EmailOutreachQueryNames.GET_GMAIL_ACCOUNT_STATS, accountId],
     () => getGmailAccountStats(accountId, false),
     {
@@ -177,7 +173,8 @@ const GmailAccountStatsCard: React.FC<GmailAccountStatsCardProps> = ({
               available
             </Text>
             <Text size="xs" c="dimmed">
-              Updated: {new Date(accountData.last_synced_at).toLocaleTimeString()}
+              Updated:{" "}
+              {new Date(accountData.last_synced_at).toLocaleTimeString()}
             </Text>
           </Group>
 
@@ -260,4 +257,3 @@ const GmailAccountStatsCard: React.FC<GmailAccountStatsCardProps> = ({
 };
 
 export default GmailAccountStatsCard;
-

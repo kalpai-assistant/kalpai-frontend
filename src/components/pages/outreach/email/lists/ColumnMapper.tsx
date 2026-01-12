@@ -19,13 +19,14 @@ import {
   IconCheck,
   IconInfoCircle,
   IconTable,
+  IconSparkles,
 } from "@tabler/icons-react";
 import {
   ColumnMapping,
-  SystemField,
   SYSTEM_FIELDS,
   FilePreview,
 } from "../../../../../types/emailList";
+import { autoDetectColumnsWithSemantics } from "../../../../../utils/columnMatcher";
 
 /**
  * ColumnMapper Component
@@ -46,9 +47,13 @@ const ColumnMapper: React.FC<ColumnMapperProps> = ({
 }) => {
   const [mapping, setMapping] = useState<ColumnMapping>(initialMapping);
 
-  // Auto-detect columns on mount
+  // Auto-detect columns on mount using semantic matching
   useEffect(() => {
-    const autoMapping = autoDetectColumns(filePreview.columns, SYSTEM_FIELDS);
+    const autoMapping = autoDetectColumnsWithSemantics(
+      filePreview.columns,
+      SYSTEM_FIELDS,
+      0.5, // Minimum 50% confidence for auto-mapping
+    );
     setMapping(autoMapping);
   }, [filePreview.columns]);
 
@@ -97,6 +102,16 @@ const ColumnMapper: React.FC<ColumnMapperProps> = ({
               <Text fw={600} size="sm">
                 Map Your Columns
               </Text>
+              <Tooltip label="Using AI-powered semantic matching">
+                <Badge
+                  size="xs"
+                  variant="light"
+                  color="violet"
+                  leftSection={<IconSparkles size={12} />}
+                >
+                  Smart Detection
+                </Badge>
+              </Tooltip>
             </Group>
             <Badge
               color={isValid ? "green" : "orange"}
@@ -114,8 +129,8 @@ const ColumnMapper: React.FC<ColumnMapperProps> = ({
           </Group>
 
           <Text size="xs" c="dimmed">
-            Match your file columns to our system fields. Required fields must
-            be mapped before upload.
+            Columns are auto-mapped using intelligent semantic matching. Review
+            and adjust as needed.
           </Text>
 
           {!isValid && (
@@ -278,86 +293,8 @@ const ColumnMapper: React.FC<ColumnMapperProps> = ({
   );
 };
 
-/**
- * Auto-detect columns based on common naming patterns
- * Uses fuzzy matching to suggest mappings
- */
-const autoDetectColumns = (
-  fileColumns: string[],
-  systemFields: SystemField[],
-): ColumnMapping => {
-  const mapping: ColumnMapping = {};
-
-  systemFields.forEach((field) => {
-    const detected = detectColumn(fileColumns, field.key);
-    mapping[field.key] = detected;
-  });
-
-  return mapping;
-};
-
-/**
- * Detect column based on field key using fuzzy matching
- */
-const detectColumn = (columns: string[], fieldKey: string): string | null => {
-  const normalizedFieldKey = fieldKey.toLowerCase().replace(/_/g, " ");
-
-  // Exact match (case-insensitive)
-  const exactMatch = columns.find(
-    (col) => col.toLowerCase() === normalizedFieldKey,
-  );
-  if (exactMatch) return exactMatch;
-
-  // Common variations
-  const variations: { [key: string]: string[] } = {
-    email: ["email", "e-mail", "email address", "emailaddress", "mail"],
-    name: [
-      "name",
-      "full name",
-      "fullname",
-      "contact name",
-      "contact",
-      "person",
-    ],
-    first_name: ["first name", "firstname", "first", "given name", "givenname"],
-    last_name: [
-      "last name",
-      "lastname",
-      "last",
-      "surname",
-      "family name",
-      "familyname",
-    ],
-    company_name: [
-      "company",
-      "company name",
-      "companyname",
-      "organization",
-      "org",
-    ],
-    location: ["location", "city", "place", "address", "region"],
-    phone_number: [
-      "phone",
-      "phone number",
-      "phonenumber",
-      "mobile",
-      "contact number",
-      "tel",
-      "telephone",
-    ],
-  };
-
-  const fieldVariations = variations[fieldKey] || [];
-
-  for (const variation of fieldVariations) {
-    const match = columns.find((col) =>
-      col.toLowerCase().includes(variation.toLowerCase()),
-    );
-    if (match) return match;
-  }
-
-  return null;
-};
+// Semantic column detection is now handled by autoDetectColumnsWithSemantics
+// from columnMatcher.ts utility
 
 /**
  * Validate column mapping
