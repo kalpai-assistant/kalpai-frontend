@@ -64,7 +64,8 @@ const UpdateCampaignContent: React.FC<UpdateCampaignContentProps> = ({
       ai_flavor: campaign.ai_flavor || "",
     },
     validate: {
-      subject_line: (value: string) => (!value ? "Subject line is required" : null),
+      subject_line: (value: string) =>
+        !value ? "Subject line is required" : null,
     },
   });
 
@@ -219,6 +220,16 @@ const UpdateCampaignContent: React.FC<UpdateCampaignContentProps> = ({
         />
 
         <Group justify="flex-end">
+          <Button
+            type="submit"
+            loading={updateMutation.isLoading}
+            variant="subtle"
+            onClick={() => {
+              form.reset();
+            }}
+          >
+            Cancel
+          </Button>
           <Button
             type="submit"
             loading={updateMutation.isLoading}
