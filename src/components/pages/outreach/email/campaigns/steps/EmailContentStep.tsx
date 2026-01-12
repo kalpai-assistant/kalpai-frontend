@@ -316,10 +316,12 @@ const EmailContentStep: React.FC<EmailContentStepProps> = ({
             onChange={(value) => {
               form.setFieldValue("email_template", value);
             }}
-            placeholder="Hi {{name}}, we're excited to introduce... (You can write directly or generate from prompt above)"
+            placeholder="Hi {name}, we're excited to introduce... (You can write directly or generate from prompt above)"
             variables={
               availableVariables.length > 0
-                ? availableVariables.map((v) => v.replace(/[{}]/g, ""))
+                ? availableVariables.map((v) =>
+                    v.replace("{", "").replace("}", ""),
+                  )
                 : ["name", "company_name", "location", "phone_number", "email"]
             }
             onImageDrop={handleImageDrop}

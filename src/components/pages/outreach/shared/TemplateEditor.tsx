@@ -35,7 +35,7 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({
   const [isDragging, setIsDragging] = useState(false);
 
   const insertVariable = (variable: string) => {
-    const template = `{{${variable}}}`;
+    const template = `{${variable}}`;
     const newValue = value + template;
     onChange(newValue);
   };
@@ -57,7 +57,7 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({
     placeholder: string,
     cursorPosition?: number,
   ) => {
-    const placeholderText = `{{${placeholder}}}`;
+    const placeholderText = `{${placeholder}}`;
 
     if (cursorPosition !== undefined && textareaRef.current) {
       // Insert at cursor position
@@ -194,7 +194,7 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({
               variant="light"
               onClick={() => insertVariable(variable)}
             >
-              {`{{${variable}}}`}
+              {`{${variable}}`}
             </Button>
           ))}
         </Group>
