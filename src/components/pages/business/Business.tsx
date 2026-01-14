@@ -11,13 +11,14 @@ import {
   Tooltip,
   UnstyledButton,
   ActionIcon,
+  Badge,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import styles from "./Business.module.scss";
 import { useEffect, useState } from "react";
 import { IconChevronRight, IconLogout } from "@tabler/icons-react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { unsetLocalStorage } from "../../../utils/utils";
+import { unsetLocalStorage, isTeamMember } from "../../../utils/utils";
 import { NavbarConfigMap } from "../../../utils/constants";
 import { FaAngleRight } from "react-icons/fa";
 
@@ -29,6 +30,7 @@ const Business: React.FC = () => {
     useDisclosure();
 
   const [activeComponent, setActiveComponent] = useState<string>("");
+  const isTeamMemberUser = isTeamMember();
 
   useEffect(() => {
     // Match the pathname with the component names
@@ -72,14 +74,27 @@ const Business: React.FC = () => {
           // Full sidebar
           <>
             <AppShell.Section>
-              <Flex p="md" align="center" justify="flex-start" gap="md">
-                <Burger
-                  opened={opened}
-                  onClick={toggle}
-                  size="md"
-                  className={styles.burger}
-                />
-                <Title order={2}>Kalp AI</Title>
+              <Flex
+                p="md"
+                align="center"
+                justify="flex-start"
+                gap="md"
+                direction="column"
+              >
+                <Flex w="100%" align="center" gap="md">
+                  <Burger
+                    opened={opened}
+                    onClick={toggle}
+                    size="md"
+                    className={styles.burger}
+                  />
+                  <Title order={2}>Kalp AI</Title>
+                </Flex>
+                {isTeamMemberUser && (
+                  <Badge color="blue" variant="light" size="sm" fullWidth>
+                    Team Member
+                  </Badge>
+                )}
               </Flex>
             </AppShell.Section>
             <AppShell.Section grow component={ScrollArea}>

@@ -5,6 +5,9 @@ import App from "./App";
 // import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
+import { ModalsProvider } from "@mantine/modals";
+import "@mantine/notifications/styles.css";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +26,10 @@ if (rootElement) {
             primaryColor: "blue",
           }}
         >
-          <App />
+          <Notifications position="top-right" />
+          <ModalsProvider>
+            <App />
+          </ModalsProvider>
         </MantineProvider>
       </QueryClientProvider>
     </React.StrictMode>,

@@ -316,6 +316,16 @@ export interface BulkDeleteCampaignEmailsResponse {
   total_recipients: number;
 }
 
+// Email List Association (for campaign display)
+export interface EmailListAssociation {
+  id: number;
+  name: string;
+  description?: string | null;
+  total_contacts: number;
+  created_time: string;
+  updated_time: string;
+}
+
 // Campaign Types
 export interface Campaign {
   id: number;
@@ -338,6 +348,7 @@ export interface Campaign {
   gmail_accounts?: CampaignGmailAccount[]; // Multi-sender support
   team_assignment_enabled?: boolean; // NEW: Team assignment feature
   auto_reply_enabled?: boolean; // Track auto-reply status
+  email_list_associations?: EmailListAssociation[]; // NEW: Associated email lists
 }
 
 export interface CampaignRequest {

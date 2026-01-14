@@ -5,7 +5,6 @@ import GmailAccounts from "./accounts/GmailAccounts";
 import GmailOAuthCallback from "./accounts/GmailOAuthCallback";
 import EmailLists from "./lists/EmailLists";
 import EmailCampaigns from "./campaigns/EmailCampaigns";
-import EmailTeamMembers from "./team/EmailTeamMembers";
 import CreateEmailList from "./lists/CreateEmailList";
 import EmailListDetails from "./lists/EmailListDetails";
 import CreateEmailCampaign from "./campaigns/CreateEmailCampaign";
@@ -62,7 +61,6 @@ const EmailOutreach: React.FC = () => {
             <Tabs.Tab value="accounts">Gmail Accounts</Tabs.Tab>
             <Tabs.Tab value="lists">Email Lists</Tabs.Tab>
             <Tabs.Tab value="campaigns">Campaigns</Tabs.Tab>
-            <Tabs.Tab value="team">Team Members</Tabs.Tab>
           </Tabs.List>
 
           <Tabs.Panel value="accounts" pt="md">
@@ -101,12 +99,6 @@ const EmailOutreach: React.FC = () => {
                 path="/campaigns/:campaignId"
                 element={<EmailCampaignDetails />}
               />
-            </Routes>
-          </Tabs.Panel>
-
-          <Tabs.Panel value="team" pt="md">
-            <Routes>
-              <Route path="/team" element={<EmailTeamMembers />} />
             </Routes>
           </Tabs.Panel>
         </Tabs>

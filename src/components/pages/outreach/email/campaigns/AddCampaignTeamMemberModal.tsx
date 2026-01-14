@@ -107,9 +107,7 @@ const AddCampaignTeamMemberModal: React.FC<AddCampaignTeamMemberModalProps> = ({
         }, 1500);
       },
       onError: (error: any) => {
-        setErrorMessage(
-          error?.response?.data?.detail || "Failed to add team member",
-        );
+        setErrorMessage(error);
         setSuccessMessage("");
       },
     },
