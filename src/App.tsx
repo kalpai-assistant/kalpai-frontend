@@ -37,6 +37,7 @@ import Integrations from "./components/pages/integrations/Integrations";
 import Outreach from "./components/pages/outreach/Outreach";
 import GmailOAuthCallback from "./components/pages/outreach/email/accounts/GmailOAuthCallback";
 import { initializeCognito } from "./services/cognitoConfig";
+import TeamManagement from "./components/pages/business/TeamManagement";
 
 function SetNavigateInApiClient() {
   const navigate = useNavigate();
@@ -98,6 +99,7 @@ const App: React.FC = () => {
             <Route path="/" element={<BusinessDashboard />} />
             <Route path="/data" element={<BusinessData />} />
             <Route path="/analytics" element={<BusinessAnalytics />} />
+            <Route path="/team" element={<TeamManagement />} />
             <Route
               path="/chats"
               element={<ChatHistory showSourceLogos={true} />}

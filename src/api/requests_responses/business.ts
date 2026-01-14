@@ -39,7 +39,9 @@ export interface BusinessOnboardResponse {
 
 export interface GenerateTokenResponse {
   token: string;
-  is_admin: boolean;
+  is_admin?: boolean;
+  is_team_member?: boolean;
+  business_id?: number;
 }
 
 export interface StandardResponse {

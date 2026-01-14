@@ -35,6 +35,11 @@ export const getUserData = (
   return userData;
 };
 
+export const isTeamMember = (): boolean => {
+  const userData = getUserData();
+  return userData?.is_team_member === true;
+};
+
 export const getAdminAccessData = (): string | null => {
   return localStorage.getItem(UserLocalStorageTypes.ADMIN_ACCESS_EMAIL);
 };

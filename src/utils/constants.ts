@@ -7,6 +7,7 @@ import {
   IconMessageCircle,
   IconBell,
   IconSend,
+  IconUsers,
 } from "@tabler/icons-react";
 
 export enum UserLocalStorageTypes {
@@ -70,6 +71,11 @@ export const NavbarConfigMap: {
     path: "/analytics",
     bgColor: "#f4f4f4",
     icon: IconChartBar,
+  },
+  Team: {
+    path: "/team",
+    bgColor: "white",
+    icon: IconUsers,
   },
   Integrations: {
     path: "/integrations",

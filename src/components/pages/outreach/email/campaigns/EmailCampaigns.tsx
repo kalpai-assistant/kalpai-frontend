@@ -14,6 +14,7 @@ import {
   ActionIcon,
   Divider,
   Badge,
+  Tooltip,
 } from "@mantine/core";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -21,12 +22,13 @@ import {
   IconPlus,
   IconAlertCircle,
   IconMail,
-  IconCalendar,
-  IconEye,
   IconTrash,
-  IconEdit,
   IconClock,
   IconUsers,
+  IconPlayerPlay,
+  IconPlayerPause,
+  IconFileText,
+  IconSparkles,
 } from "@tabler/icons-react";
 import {
   getCampaigns,
@@ -40,6 +42,8 @@ import {
   Campaign,
 } from "../../../../../api/requests_responses/outreach/email";
 import CampaignStatusBadge from "../../shared/CampaignStatusBadge";
+import EmailListAssociationsPopover from "./EmailListAssociationsPopover";
+import CampaignFeatureToggles from "./CampaignFeatureToggles";
 import styles from "./EmailCampaigns.module.scss";
 
 const EmailCampaigns: React.FC = () => {
@@ -278,29 +282,24 @@ const EmailCampaigns: React.FC = () => {
               <Divider />
               <Box className={styles.listHeader} px="md" py="xs">
                 <Group justify="space-between" wrap="nowrap">
-                  <Text fw={600} size="sm" c="dimmed" style={{ flex: 2 }}>
-                    Campaign Name
+                  <Text fw={600} size="sm" c="dimmed" style={{ flex: 2.5 }}>
+                    Campaign
                   </Text>
                   <Text fw={600} size="sm" c="dimmed" style={{ flex: 1 }}>
-                    Status & Info
+                    Status
                   </Text>
                   <Text fw={600} size="sm" c="dimmed" style={{ flex: 1 }}>
                     Progress
                   </Text>
                   <Text fw={600} size="sm" c="dimmed" style={{ flex: 1 }}>
-                    Schedule
+                    Features
                   </Text>
-                  <Box
-                    style={{
-                      flex: 1.5,
-                      display: "flex",
-                      justifyContent: "flex-end",
-                    }}
-                  >
-                    <Text fw={600} size="sm" c="dimmed">
-                      Actions
-                    </Text>
-                  </Box>
+                  <Text fw={600} size="sm" c="dimmed" style={{ flex: 0.8 }}>
+                    Type
+                  </Text>
+                  <Text fw={600} size="sm" c="dimmed" style={{ flex: 0.8 }}>
+                    Recipients
+                  </Text>
                 </Group>
               </Box>
             </>
@@ -440,36 +439,60 @@ const EmailCampaignListItem: React.FC<EmailCampaignListItemProps> = ({
   onResume,
   isLast,
 }) => {
-  const canEdit = campaign.status === CampaignStatus.DRAFT;
   const canStart =
     campaign.status === CampaignStatus.DRAFT ||
     campaign.status === CampaignStatus.SCHEDULED;
   const canPause = campaign.status === CampaignStatus.RUNNING;
   const canResume = campaign.status === CampaignStatus.PAUSED;
-  const canDelete =
-    campaign.status === CampaignStatus.DRAFT ||
-    campaign.status === CampaignStatus.COMPLETED;
 
   const successRate =
     campaign.total_recipients > 0
       ? ((campaign.emails_sent / campaign.total_recipients) * 100).toFixed(1)
       : "0";
 
+  const handleRowClick = () => {
+    onView(campaign.id);
+  };
+
   return (
     <Paper
       className={styles.listItem}
       p="md"
       withBorder
-      style={{ borderBottom: isLast ? "1px solid" : "none" }}
+      style={{
+        borderBottom: isLast ? "1px solid" : "none",
+        cursor: "pointer",
+        transition: "background-color 0.2s ease",
+      }}
+      onClick={handleRowClick}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = "var(--mantine-color-gray-0)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = "transparent";
+      }}
     >
       <Group justify="space-between" align="flex-start" wrap="nowrap">
-        <Box style={{ flex: 2 }}>
+        {/* Column 1: Campaign (Name + Subject + Status Badges + Controls) */}
+        <Box style={{ flex: 2.5 }}>
           <Text fw={500} size="md" mb={4}>
             {campaign.name}
           </Text>
-          <Text size="sm" c="dimmed" mb={8} lineClamp={1}>
-            Subject: {campaign.subject_line}
-          </Text>
+          <Tooltip
+            label={campaign.subject_line}
+            position="bottom-start"
+            withArrow
+          >
+            <Text
+              size="sm"
+              c="dimmed"
+              mb={8}
+              lineClamp={1}
+              style={{ cursor: "help" }}
+            >
+              Subject: {campaign.subject_line}
+            </Text>
+          </Tooltip>
           <Group gap="xs" wrap="wrap">
             <CampaignStatusBadge status={campaign.status} />
             {campaign.sending_schedule?.enabled && (
@@ -493,9 +516,72 @@ const EmailCampaignListItem: React.FC<EmailCampaignListItemProps> = ({
                 {campaign.gmail_accounts.length > 1 ? "s" : ""}
               </Badge>
             )}
+
+            {/* Play/Pause/Delete Controls */}
+            <Group gap={4} ml="auto">
+              {canStart && onStart && (
+                <Tooltip label="Start Campaign" withArrow>
+                  <ActionIcon
+                    variant="light"
+                    color="green"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStart(campaign.id);
+                    }}
+                  >
+                    <IconPlayerPlay size={14} />
+                  </ActionIcon>
+                </Tooltip>
+              )}
+              {canPause && onPause && (
+                <Tooltip label="Pause Campaign" withArrow>
+                  <ActionIcon
+                    variant="light"
+                    color="yellow"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onPause(campaign.id);
+                    }}
+                  >
+                    <IconPlayerPause size={14} />
+                  </ActionIcon>
+                </Tooltip>
+              )}
+              {canResume && onResume && (
+                <Tooltip label="Resume Campaign" withArrow>
+                  <ActionIcon
+                    variant="light"
+                    color="green"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onResume(campaign.id);
+                    }}
+                  >
+                    <IconPlayerPlay size={14} />
+                  </ActionIcon>
+                </Tooltip>
+              )}
+              <Tooltip label="Delete Campaign" withArrow>
+                <ActionIcon
+                  variant="subtle"
+                  color="red"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(campaign.id);
+                  }}
+                >
+                  <IconTrash size={14} />
+                </ActionIcon>
+              </Tooltip>
+            </Group>
           </Group>
         </Box>
 
+        {/* Column 2: Status (existing status info) */}
         <Stack gap={4} style={{ flex: 1 }}>
           {campaign.gmail_accounts && campaign.gmail_accounts.length > 0 && (
             <Group gap={4} wrap="nowrap">
@@ -519,6 +605,7 @@ const EmailCampaignListItem: React.FC<EmailCampaignListItemProps> = ({
           )}
         </Stack>
 
+        {/* Column 3: Progress */}
         <Stack gap={4} style={{ flex: 1 }}>
           <Group gap={4} wrap="nowrap">
             <IconMail size={14} />
@@ -538,85 +625,45 @@ const EmailCampaignListItem: React.FC<EmailCampaignListItemProps> = ({
           )}
         </Stack>
 
-        <Stack gap={4} style={{ flex: 1 }}>
-          {campaign.scheduled_at && (
-            <Group gap={4} wrap="nowrap">
-              <IconCalendar size={14} />
-              <Text size="xs" c="dimmed" lineClamp={1}>
-                {new Date(campaign.scheduled_at).toLocaleDateString()}
-              </Text>
-            </Group>
-          )}
-          {campaign.sending_schedule?.enabled && (
-            <Group gap={4} wrap="nowrap">
-              <IconClock size={14} />
-              <Text size="xs" c="dimmed" lineClamp={1}>
-                {campaign.sending_schedule.timezone}
-              </Text>
-            </Group>
-          )}
-        </Stack>
+        {/* Column 4: Features (Team Assignment & Auto-Reply toggles) */}
+        <Box style={{ flex: 1 }}>
+          <CampaignFeatureToggles
+            campaignId={campaign.id}
+            teamAssignmentEnabled={campaign.team_assignment_enabled || false}
+            autoReplyEnabled={campaign.auto_reply_enabled || false}
+          />
+        </Box>
 
-        <Group gap="xs" style={{ flex: 1.5 }} justify="flex-end" wrap="nowrap">
-          <Button
-            variant="light"
-            size="sm"
-            leftSection={<IconEye size={16} />}
-            onClick={() => onView(campaign.id)}
-          >
-            View
-          </Button>
-          {canEdit && onEdit && (
-            <Button
-              variant="light"
-              size="sm"
-              leftSection={<IconEdit size={16} />}
-              onClick={() => onEdit(campaign.id)}
-            >
-              Edit
-            </Button>
+        {/* Column 5: Type (Template vs AI) */}
+        <Box style={{ flex: 0.8 }}>
+          {campaign.ai_flavor ? (
+            <Group gap={4} wrap="nowrap">
+              <IconSparkles
+                size={16}
+                style={{ color: "var(--mantine-color-violet-6)" }}
+              />
+              <Text size="sm" style={{ textTransform: "capitalize" }}>
+                {campaign.ai_flavor}
+              </Text>
+            </Group>
+          ) : (
+            <Group gap={4} wrap="nowrap">
+              <IconFileText
+                size={16}
+                style={{ color: "var(--mantine-color-blue-6)" }}
+              />
+              <Text size="sm">Template</Text>
+            </Group>
           )}
-          {canStart && onStart && (
-            <Button
-              variant="light"
-              color="green"
-              size="sm"
-              onClick={() => onStart(campaign.id)}
-            >
-              Start
-            </Button>
-          )}
-          {canPause && onPause && (
-            <Button
-              variant="light"
-              color="yellow"
-              size="sm"
-              onClick={() => onPause(campaign.id)}
-            >
-              Pause
-            </Button>
-          )}
-          {canResume && onResume && (
-            <Button
-              variant="light"
-              color="green"
-              size="sm"
-              onClick={() => onResume(campaign.id)}
-            >
-              Resume
-            </Button>
-          )}
-          {canDelete && (
-            <ActionIcon
-              variant="subtle"
-              color="red"
-              size="lg"
-              onClick={() => onDelete(campaign.id)}
-            >
-              <IconTrash size={16} />
-            </ActionIcon>
-          )}
-        </Group>
+        </Box>
+
+        {/* Column 6: Recipients (with email list associations popover) */}
+        <Box style={{ flex: 0.8 }}>
+          <EmailListAssociationsPopover
+            associations={campaign.email_list_associations || []}
+            totalRecipients={campaign.total_recipients}
+          />
+        </Box>
       </Group>
     </Paper>
   );
