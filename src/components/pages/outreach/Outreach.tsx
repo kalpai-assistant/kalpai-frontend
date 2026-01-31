@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Title, SegmentedControl, Paper, Text } from "@mantine/core";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import EmailOutreach from "./email/EmailOutreach";
+import WhatsAppOutreach from "./whatsapp/WhatsAppOutreach";
 
 const ComingSoon: React.FC<{ channel: string }> = ({ channel }) => {
   return (
@@ -29,26 +30,32 @@ const Outreach: React.FC = () => {
     return "email"; // Default to email
   };
 
-  const [selectedChannel, setSelectedChannel] = useState<string>(
-    getCurrentChannel(),
-  );
+  const [selectedChannel, setSelectedChannel] =
+    useState<string>(getCurrentChannel());
 
   const handleChannelChange = (value: string) => {
     setSelectedChannel(value);
     if (value === "email") {
       navigate("/outreach/email/accounts");
+    } else if (value === "whatsapp") {
+      navigate("/outreach/whatsapp/accounts");
     } else {
       navigate(`/outreach/${value}`);
     }
   };
 
-  // Navigate to default tab when email channel is selected initially
+  // Navigate to default tab when email or whatsapp channel is selected initially
   useEffect(() => {
     if (
       selectedChannel === "email" &&
       location.pathname === "/outreach/email"
     ) {
       navigate("/outreach/email/accounts", { replace: true });
+    } else if (
+      selectedChannel === "whatsapp" &&
+      location.pathname === "/outreach/whatsapp"
+    ) {
+      navigate("/outreach/whatsapp/accounts", { replace: true });
     }
   }, [selectedChannel, location.pathname, navigate]);
 
@@ -69,7 +76,7 @@ const Outreach: React.FC = () => {
           data={[
             { value: "email", label: "Email" },
             { value: "sms", label: "SMS", disabled: true },
-            { value: "whatsapp", label: "WhatsApp", disabled: true },
+            { value: "whatsapp", label: "WhatsApp" },
             { value: "calling", label: "Calling", disabled: true },
           ]}
           size="md"
@@ -79,8 +86,8 @@ const Outreach: React.FC = () => {
 
       <Routes>
         <Route path="/email/*" element={<EmailOutreach />} />
+        <Route path="/whatsapp/*" element={<WhatsAppOutreach />} />
         <Route path="/sms" element={<ComingSoon channel="SMS" />} />
-        <Route path="/whatsapp" element={<ComingSoon channel="WhatsApp" />} />
         <Route path="/calling" element={<ComingSoon channel="Calling" />} />
         <Route path="/" element={<EmailOutreach />} />
       </Routes>
